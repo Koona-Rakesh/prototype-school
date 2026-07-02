@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjana Play School | Where Learning is Play!</title>
+    <meta name="description" content="Trusted by parents in Secunderabad for a nurturing, safe, and fun environment.">
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           CSS RESET & BASE VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-color: #FDFBF7; /* Soft off-white */
+            --primary: #FFB347;  /* Warm soft orange */
+            --secondary: #25D366; /* Vibrant Green for WhatsApp */
+            --accent-pink: #FFC0CB; /* Blush Pink */
+            --accent-blue: #87CEEB; /* Sky Blue */
+            --accent-green: #98FF98; /* Mint Green */
+            
+            --text-dark: #2D3748;
+            --text-light: #718096;
+            
+            --glass-bg: rgba(253, 251, 247, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            
+            --border-radius: 24px;
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.08);
+            
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ==========================================================================
+           TYPOGRAPHY & UTILITIES
+           ========================================================================== */
+        h1, h2, h3 {
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2; /* Keeps text clickable above animations */
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* ==========================================================================
+           JOYFUL BACKGROUND ANIMATIONS
+           ========================================================================== */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0; /* Stays above the body background but behind content */
+            overflow: hidden;
+            pointer-events: none; /* Stops shapes from blocking clicks */
+        }
+
+        .animated-background i {
+            position: absolute;
+            display: block;
+            opacity: 0;
+            bottom: -100px;
+            animation: float-upwards linear infinite;
+        }
+
+        @keyframes float-upwards {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.25; } 
+            90% { opacity: 0.25; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        .bg-shape-1 { left: 10%; font-size: 3rem; color: var(--primary); animation-duration: 25s; animation-delay: 0s; }
+        .bg-shape-2 { left: 25%; font-size: 2rem; color: var(--accent-blue); animation-duration: 32s; animation-delay: 4s; }
+        .bg-shape-3 { left: 45%; font-size: 4rem; color: var(--accent-pink); animation-duration: 20s; animation-delay: 8s; }
+        .bg-shape-4 { left: 65%; font-size: 2.5rem; color: var(--accent-green); animation-duration: 28s; animation-delay: 2s; }
+        .bg-shape-5 { left: 80%; font-size: 3.5rem; color: var(--primary); animation-duration: 35s; animation-delay: 12s; }
+        .bg-shape-6 { left: 90%; font-size: 2.2rem; color: var(--accent-blue); animation-duration: 22s; animation-delay: 6s; }
+
+        /* ==========================================================================
+           KEYFRAME ANIMATIONS (Content)
+           ========================================================================== */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes bounce-soft {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        /* ==========================================================================
+           NAVIGATION BAR (GLASSMORPHISM)
+           ========================================================================== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 5px 0; /* Reduced thickness */
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            padding-top: 130px; /* Adjusted for thinner header */
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-pink) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 90%;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: var(--primary);
+            box-shadow: var(--shadow-soft);
+            border: 2px solid transparent;
+        }
+
+        .btn-white:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-whatsapp {
+            background: var(--secondary);
+            color: #fff;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-whatsapp:hover {
+            background: #1EBE5C;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 40px 100px 40px 100px;
+            box-shadow: var(--shadow-hover);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* ==========================================================================
+           PROGRAMS / FEATURES SECTION
+           ========================================================================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce-soft 3s infinite ease-in-out;
+        }
+
+        .feature-card:nth-child(1) .feature-icon { animation-delay: 0s; }
+        .feature-card:nth-child(2) .feature-icon { animation-delay: 1s; }
+        .feature-card:nth-child(3) .feature-icon { animation-delay: 2s; }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .feature-card:nth-child(1)::before { background-color: var(--accent-pink); }
+        .feature-card:nth-child(2)::before { background-color: var(--accent-blue); }
+        .feature-card:nth-child(3)::before { background-color: var(--accent-green); }
+
+        /* ==========================================================================
+           GALLERY SECTION
+           ========================================================================== */
+        .gallery {
+            background-color: #fff;
+            border-radius: 40px;
+            margin: 50px 20px;
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* ==========================================================================
+           ADMISSIONS FORM SECTION
+           ========================================================================== */
+        .admissions {
+            position: relative;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background-color: #F8FAFC;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 179, 71, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            justify-content: center;
+        }
+
+        .btn-submit:hover {
+            background: #FA9C1B;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        footer {
+            background-color: #fff;
+            padding: 80px 0 30px;
+            border-top: 1px solid #eee;
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-col p, .footer-col ul li {
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .footer-col i {
+            margin-top: 5px;
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           FLOATING ACTION BAR
+           ========================================================================== */
+        .floating-social {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .float-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-hover);
+            transition: var(--transition);
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1) translateX(-5px);
+        }
+
+        .fb-btn { background: #1877F2; }
+        .ig-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .wa-btn { background: var(--secondary); }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN (TABLET & MOBILE)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin: 0 auto 40px;
+            }
+            .cta-group {
+                justify-content: center;
+            }
+            .hero-image img {
+                border-radius: 40px;
+                max-width: 80%;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: var(--shadow-soft);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease-in-out;
+            }
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+            .nav-links li {
+                text-align: center;
+                border-bottom: 1px solid #f0f0f0;
+                width: 100%;
+                justify-content: center;
+            }
+            .nav-links li a {
+                display: block;
+                padding: 20px;
+                width: 100%;
+            }
+            .nav-links li a[style*="background"] {
+                margin: 10px;
+                width: auto;
+                display: inline-block;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .form-container {
+                padding: 30px 20px;
+            }
+            .floating-social {
+                right: 10px;
+            }
+            .float-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .logo {
+                max-width: 250px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= JOYFUL BACKGROUND ANIMATIONS ================= -->
+    <div class="animated-background">
+        <i class="fa-solid fa-star bg-shape-1"></i>
+        <i class="fa-solid fa-cloud bg-shape-2"></i>
+        <i class="fa-solid fa-heart bg-shape-3"></i>
+        <i class="fa-solid fa-star bg-shape-4"></i>
+        <i class="fa-solid fa-paper-plane bg-shape-5"></i>
+        <i class="fa-solid fa-cloud bg-shape-6"></i>
+    </div>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav>
+        <div class="container nav-container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            
+            <!-- 1. THE LOGO -->
+            <div class="logo" style="max-width: 380px; width: 100%; display: flex; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 160" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="gradOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFD194"/>
+                      <stop offset="100%" stop-color="#FFB347"/>
+                    </linearGradient>
+                    <linearGradient id="gradPink" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFC0CB"/>
+                      <stop offset="100%" stop-color="#FF91A4"/>
+                    </linearGradient>
+                    <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#B0F5C3"/>
+                      <stop offset="100%" stop-color="#4ADE80"/>
+                    </linearGradient>
+                    <linearGradient id="gradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#A1E5FF"/>
+                      <stop offset="100%" stop-color="#60A5FA"/>
+                    </linearGradient>
+                    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.06"/>
+                    </filter>
+                  </defs>
+            
+                  <g filter="url(#shadow)" transform="translate(20, 15)">
+                    <path d="M 18 75 A 47 47 0 0 0 112 75" fill="none" stroke="url(#gradBlue)" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M 65 105 C 25 105, 25 55, 45 55 C 55 55, 65 65, 65 75 Z" fill="url(#gradPink)"/>
+                    <path d="M 65 105 C 105 105, 105 55, 85 55 C 75 55, 65 65, 65 75 Z" fill="url(#gradGreen)"/>
+                    <circle cx="65" cy="34" r="14" fill="url(#gradOrange)"/>
+                    <circle cx="65" cy="34" r="4" fill="#FFFFFF"/>
+                  </g>
+            
+                  <g transform="translate(165, 88)">
+                    <text x="0" y="0" font-family="'Nunito', -apple-system, sans-serif" font-size="54" font-weight="800" fill="#2D3748" letter-spacing="-1">Sanjana</text>
+                    <text x="235" y="0" font-family="'Nunito', -apple-system, sans-serif" font-size="54" font-weight="800" fill="#FFB347" letter-spacing="-1">Play School</text>
+                    <text x="4" y="32" font-family="'Nunito', -apple-system, sans-serif" font-size="14" font-weight="800" fill="#718096" letter-spacing="4.5">JOY • LEARNING • CARING</text>
+                  </g>
+                </svg>
+            </div>
+
+            <!-- 2. THE NAVIGATION LINKS -->
+            <ul class="nav-links">
+                <li style="display: flex; align-items: center;"><a href="#programs">About</a></li>
+                <li style="display: flex; align-items: center;"><a href="#gallery">Gallery</a></li>
+                <li style="display: flex; align-items: center;"><a href="#contact">Contact</a></li>
+                <li style="display: flex; align-items: center;"><a href="#admissions" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 179, 71, 0.4);">Enquire</a></li>
+            </ul>
+
+            <!-- 3. MOBILE MENU TOGGLE -->
+            <div class="menu-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+    <header class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+                <h1>Where Learning <br><span>is Play!</span></h1>
+                <p>Trusted by parents in Secunderabad for providing a nurturing, safe, and wildly fun environment for your child's first steps into education.</p>
+                
+                <div class="cta-group">
+                    <a href="#admissions" class="btn btn-white">
+                        <i class="fa-solid fa-calendar-check"></i> Book a Visit
+                    </a>
+                    <a href="https://wa.me/917207761777" target="_blank" class="btn btn-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Happy child playing at Sanjana Play School">
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= PROGRAMS / FEATURES ================= -->
+    <section id="programs" class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Joyful Programs</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Designed to stimulate curiosity, creativity, and confidence.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">🎨</div>
+                <h3>Creative Arts</h3>
+                <p>Finger painting, crafts, and musical exploration to help your child express their vibrant inner world.</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">🚀</div>
+                <h3>Early Learning</h3>
+                <p>Interactive storytelling and foundational phonics to launch a lifelong love for reading and discovery.</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">🍎</div>
+                <h3>Health & Play</h3>
+                <p>Outdoor activities, gentle yoga, and nutritional guidance to build strong, healthy little bodies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= GALLERY ================= -->
+    <section id="gallery" class="gallery" data-aos="fade-in">
+        <div class="container" style="padding-top: 100px;">
+            <h2 class="section-title">Campus Life</h2>
+            <p class="section-subtitle">Take a peek into the magical world of Sanjana Play School.</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Child playing">
+                </div>
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Toddler with educational toys">
+                </div>
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1602080858428-57174f9431cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Colorful toy blocks">
+                </div>
+                
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Child reading a book">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ADMISSIONS FORM ================= -->
+    <section id="admissions" class="admissions container">
+        <h2 class="section-title" data-aos="fade-up">Start the Journey</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Leave your details below and our friendly team will contact you shortly.</p>
+        
+        <div class="form-container" data-aos="fade-up" data-aos-delay="200">
+            <form id="inquiryForm">
+                <div class="form-group">
+                    <label for="parentName">Parent's Name</label>
+                    <input type="text" id="parentName" class="form-control" placeholder="E.g. Priya Sharma" required>
+                </div>
+                <div class="form-group">
+                    <label for="childName">Child's Name</label>
+                    <input type="text" id="childName" class="form-control" placeholder="E.g. Aarav" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="+91 XXXXX XXXXX" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Anything we should know? (Optional)</label>
+                    <textarea id="message" class="form-control" placeholder="Tell us about your child's favorite activities..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER & CONTACT ================= -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 20px;">
+                    <i class="fa-solid fa-shapes" style="color: var(--primary);"></i> Sanjana
+                </div>
+                <p>Providing a foundation of love, joy, and learning for the leaders of tomorrow.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Maruthi Veedhi, Shivaji Nagar, <br>Secunderabad, Telangana 500003</p>
+                
+                <a href="https://maps.google.com/?q=Maruthi+Veedhi,+Shivaji+Nagar,+Secunderabad,+Telangana+500003" target="_blank" class="btn btn-white" style="margin: 5px 0 20px; font-size: 0.9rem; padding: 8px 15px;">
+                    <i class="fa-solid fa-map-location-dot" style="color: var(--primary); margin: 0;"></i> Get Directions
+                </a>
+
+                <p><i class="fa-solid fa-phone"></i> +91 72077 61777</p>
+                <p><i class="fa-solid fa-envelope"></i> hello@sanjanaplayschool.com</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Operating Hours</h4>
+                <ul>
+                    <li><i class="fa-regular fa-clock"></i> Monday - Friday: 8:30 AM - 1:30 PM</li>
+                    <li><i class="fa-regular fa-clock"></i> Saturday: 9:00 AM - 12:30 PM</li>
+                    <li><i class="fa-solid fa-ban"></i> Sunday: Closed</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sanjana Play School. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ================= FLOATING ACTION BAR ================= -->
+    <aside class="floating-social">
+        <a href="#" class="float-btn fb-btn" title="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="#" class="float-btn ig-btn" title="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/917207761777" target="_blank" class="float-btn wa-btn" title="WhatsApp Us">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </aside>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Wait for content to load before triggering animations
+        window.addEventListener('load', function() {
+            AOS.init({
+                once: true, 
+                offset: 50, 
+                duration: 800, 
+            });
+        });
+
+        // Mobile Navigation Toggle
+        const menuBtn = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            const icon = menuBtn.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu on click
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.querySelector('i').classList.remove('fa-times');
+                menuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Form Submission Intercept Demo
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.btn-submit');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Sent Successfully!';
+            btn.style.backgroundColor = '#25D366';
+            
+            setTimeout(() => {
+                this.reset();
+                btn.innerHTML = originalText;
+                btn.style.backgroundColor = '';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
